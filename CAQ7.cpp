@@ -1,3 +1,6 @@
+// Remove these comments!
+// copy & paste to Mbed compiler.
+// Remove these comments!
 #include "mbed.h"
 int a = 10;
 int b = 20;
