@@ -1,0 +1,43 @@
+At the top of the thread program you need to add the following lines from the joystick program.
+You can copy and paste them from one program to another.
+
+BusIn joy(p15,p12,p13,p16);
+DigitalIn fire(p14);
+BusOut leds(LED1,LED2,LED3,LED4);
+
+Add them after the 
+AnalogIn Pot1(p19);
+AnalogIn Pot2(p20);
+lines
+
+then you need to make a new thread.
+If look down along the threads program you will see that there are blocks of code...
+// Thread 1
+// Thread 2
+// Thread 3
+// Thread 4
+
+They all start with the same type of line:
+void threadx(void const *args)
+
+copy any one of these and rename it to thread5 and change the //description to something like jostick to describe what it in (this is only a comment).
+so the first line will read
+void thread5(void const *args)
+delete everything in this new thread between the open and closing {}
+and copy the int main part from the joystick program - everything within the {]
+so it looks like this.
+
+void thread5(void const *args)
+{
+    while(1) {
+        if (fire) {
+            leds=0xf;
+        } else {
+            leds=joy;
+        }
+        wait(0.1);
+    }
+}
+
+then you need to go further down the thread program and add a line to int main to start thread5 after the other 4 threads.
+Thread t5(thread5); //start thread5
